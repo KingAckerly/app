@@ -1,11 +1,15 @@
 package com.lsm.app.service.impl;
 
+import com.lsm.app.dao.IAppDao;
 import com.lsm.app.feign.UserServerFeign;
 import com.lsm.app.service.IAppService;
+import entity.app.AppEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class AppServiceImpl implements IAppService {
@@ -14,6 +18,9 @@ public class AppServiceImpl implements IAppService {
 
     @Autowired
     UserServerFeign userServerFeign;
+
+    @Resource
+    private IAppDao appDao;
 
     @Override
     public String test() {
@@ -29,5 +36,10 @@ public class AppServiceImpl implements IAppService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public AppEntity getApp() {
+        return appDao.getApp();
     }
 }

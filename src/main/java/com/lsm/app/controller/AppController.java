@@ -73,4 +73,9 @@ public class AppController {
         return "SUCCESS";
     }
 
+    @RequestMapping("/getApp")
+    public Result getApp() {
+        return ReturnResponse.success(appService.getApp());
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.lsm.app;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
@@ -11,6 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(exclude = MongoAutoConfiguration.class)
 @EnableEurekaClient
 @EnableFeignClients
+@MapperScan("com.lsm.app.dao")
 public class AppApplication {
 
     public static void main(String[] args) {
