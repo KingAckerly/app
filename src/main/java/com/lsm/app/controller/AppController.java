@@ -73,9 +73,17 @@ public class AppController {
         return "SUCCESS";
     }
 
-    @RequestMapping("/getApp")
+    @RequestMapping(value = "/getApp", method = RequestMethod.GET)
     public Result getApp() {
         return ReturnResponse.success(appService.getApp());
+    }
+
+    @RequestMapping(value = "/saveApp", method = RequestMethod.POST)
+    public Result saveApp(@Validated(value = AppGroups.Insert.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.saveApp(appDTO));
     }
 
 }

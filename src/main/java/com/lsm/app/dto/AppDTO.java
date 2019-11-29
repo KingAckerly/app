@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 public class AppDTO {
 
-    @NotNull(message = "APPID不能为空", groups = {AppGroups.Insert.class})
+    //@NotNull(message = "APPID不能为空", groups = {AppGroups.Insert.class})
     private Integer id;
     @NotBlank(message = "APP名称不能为空", groups = {AppGroups.Insert.class})
     private String appName;

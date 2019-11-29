@@ -1,6 +1,8 @@
 package com.lsm.app.service.impl;
 
+import com.lsm.app.base.BaseClient;
 import com.lsm.app.dao.IAppDao;
+import com.lsm.app.dto.AppDTO;
 import com.lsm.app.feign.UserServerFeign;
 import com.lsm.app.service.IAppService;
 import entity.app.AppEntity;
@@ -22,6 +24,9 @@ public class AppServiceImpl implements IAppService {
     @Resource
     private IAppDao appDao;
 
+    @Autowired
+    private BaseClient baseClient;
+
     @Override
     public String test() {
         return userServerFeign.login();
@@ -41,5 +46,10 @@ public class AppServiceImpl implements IAppService {
     @Override
     public AppEntity getApp() {
         return appDao.getApp();
+    }
+
+    @Override
+    public Integer saveApp(AppDTO appDTO) {
+        return baseClient.save(new AppEntity().setAppName(appDTO.getAppName()));
     }
 }
