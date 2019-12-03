@@ -1,10 +1,11 @@
 package com.lsm.app.service.impl;
 
-import com.lsm.app.base.BaseClient;
 import com.lsm.app.dao.IAppDao;
 import com.lsm.app.dto.AppDTO;
 import com.lsm.app.feign.UserServerFeign;
 import com.lsm.app.service.IAppService;
+import db.BaseClient;
+import db.impl.BaseClientImpl;
 import entity.app.AppEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +21,13 @@ public class AppServiceImpl implements IAppService {
     private static Logger logger = LoggerFactory.getLogger(AppServiceImpl.class);
 
     @Autowired
-    UserServerFeign userServerFeign;
+    private UserServerFeign userServerFeign;
 
     @Resource
     private IAppDao appDao;
 
-    @Autowired
-    private BaseClient baseClient;
+    //@Resource
+    //private BaseClient baseClient;
 
     @Override
     public String test() {
@@ -52,6 +53,7 @@ public class AppServiceImpl implements IAppService {
     @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
     @Override
     public Integer saveApp(AppDTO appDTO) {
+        BaseClient baseClient = new BaseClientImpl();
         return baseClient.save(buildFull(appDTO));
     }
 
