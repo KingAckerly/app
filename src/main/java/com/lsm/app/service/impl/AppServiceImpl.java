@@ -50,6 +50,16 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public Integer saveApp(AppDTO appDTO) {
-        return baseClient.save(new AppEntity().setAppName(appDTO.getAppName()));
+        return baseClient.save(buildFull(appDTO));
+    }
+
+    @Override
+    public Integer removeApp(AppDTO appDTO) {
+        return baseClient.remove(buildFull(appDTO));
+    }
+
+    private AppEntity buildFull(AppDTO appDTO) {
+        return new AppEntity().setId(appDTO.getId()).setAppName(appDTO.getAppName()).setAppInfo(appDTO.getAppInfo())
+                .setAppKey(appDTO.getAppKey());
     }
 }

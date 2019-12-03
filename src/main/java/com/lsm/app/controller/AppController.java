@@ -86,4 +86,12 @@ public class AppController {
         return ReturnResponse.success(appService.saveApp(appDTO));
     }
 
+    @RequestMapping(value = "/removeApp", method = RequestMethod.POST)
+    public Result removeApp(@Validated(value = AppGroups.Delete.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.removeApp(appDTO));
+    }
+
 }

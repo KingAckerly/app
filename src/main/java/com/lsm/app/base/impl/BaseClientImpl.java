@@ -7,7 +7,6 @@ import com.lsm.app.base.BaseClient;
 import com.lsm.app.dao.BaseDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,19 +18,19 @@ import java.util.List;
 import java.util.Map;
 
 @Service(value = "BaseClient")
-public class BaseClientImpl implements BaseClient {
+public class BaseClientImpl<T> implements BaseClient<T> {
 
     private static Logger logger = LoggerFactory.getLogger(BaseClientImpl.class);
 
     @Resource
     private BaseDao baseDao;
 
-    private Map<String, Object> transformObj(Object t) {
+    private Map<String, Object> buildParams(T t) {
         //获取表名
         if (null == t.getClass().getAnnotation(Table.class)) {
             throw new RuntimeException("Error Input Object! Error @Table Annotation.");
         }
-        Map<String, Object> re = new HashMap<String, Object>();
+        Map<String, Object> re = new HashMap<>();
         re.put("TABLE_NAME", t.getClass().getAnnotation(Table.class).value());
         Method[] m = t.getClass().getMethods();
         if (null == m || m.length <= 0) {
@@ -66,15 +65,33 @@ public class BaseClientImpl implements BaseClient {
         return re;
     }
 
+
     @Override
-    public Integer save(Object object) {
-        Map<String, Object> params = transformObj(object);
-        logger.info(new StringBuffer("Function Insert.Transformed Params:").append(params).toString());
+    public Integer save(T t) {
+        Map<String, Object> params = buildParams(t);
+        logger.info("Function Save.Params:" + params);
         return baseDao.save(params);
     }
 
     @Override
-    public Integer remove(Object object) {
+    public Integer saveBatch() {
+        return null;
+    }
+
+    @Override
+    public Integer remove(T t) {
+        Map<String, Object> params = buildParams(t);
+        logger.info("Function Remove.Params:" + params);
+        return baseDao.remove(params);
+    }
+
+    @Override
+    public Integer removeBatch(T t) {
+        return null;
+    }
+
+    @Override
+    public Integer updateBatch(T t) {
         return null;
     }
 

@@ -11,4 +11,6 @@ public interface IAppService {
     AppEntity getApp();
 
     Integer saveApp(AppDTO appDTO);
+
+    Integer removeApp(AppDTO appDTO);
 }
