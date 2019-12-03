@@ -1,11 +1,11 @@
 package com.lsm.app.controller;
 
-import base.Result;
-import base.ReturnResponse;
+import com.lsm.common.base.Result;
+import com.lsm.common.base.ReturnResponse;
+import com.lsm.common.util.BaseUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import util.BaseUtil;
 
 import java.util.HashMap;
 import java.util.Map;

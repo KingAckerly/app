@@ -1,12 +1,13 @@
 package com.lsm.app.controller;
 
-import annotation.CustomAnnotation;
-import base.Result;
-import base.ReturnResponse;
+
 import com.lsm.app.dto.AppDTO;
 import com.lsm.app.dto.groups.AppGroups;
 import com.lsm.app.service.IAppService;
-import entity.app.AppEntity;
+import com.lsm.common.annotation.CustomAnnotation;
+import com.lsm.common.base.Result;
+import com.lsm.common.base.ReturnResponse;
+import com.lsm.common.entity.app.AppEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;

@@ -1,7 +1,7 @@
 package com.lsm.app.service;
 
 import com.lsm.app.dto.AppDTO;
-import entity.app.AppEntity;
+import com.lsm.common.entity.app.AppEntity;
 
 public interface IAppService {
     String test();

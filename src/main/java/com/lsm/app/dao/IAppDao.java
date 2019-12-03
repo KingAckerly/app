@@ -1,6 +1,7 @@
 package com.lsm.app.dao;
 
-import entity.app.AppEntity;
+
+import com.lsm.common.entity.app.AppEntity;
 
 public interface IAppDao {
 

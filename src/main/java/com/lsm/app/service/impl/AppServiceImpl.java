@@ -4,9 +4,8 @@ import com.lsm.app.dao.IAppDao;
 import com.lsm.app.dto.AppDTO;
 import com.lsm.app.feign.UserServerFeign;
 import com.lsm.app.service.IAppService;
-import db.BaseClient;
-import db.impl.BaseClientImpl;
-import entity.app.AppEntity;
+import com.lsm.common.db.BaseClient;
+import com.lsm.common.entity.app.AppEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ public class AppServiceImpl implements IAppService {
     @Resource
     private IAppDao appDao;
 
-    //@Resource
-    //private BaseClient baseClient;
+    @Resource
+    private BaseClient baseClient;
 
     @Override
     public String test() {
@@ -53,7 +52,6 @@ public class AppServiceImpl implements IAppService {
     @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
     @Override
     public Integer saveApp(AppDTO appDTO) {
-        BaseClient baseClient = new BaseClientImpl();
         return baseClient.save(buildFull(appDTO));
     }
 
