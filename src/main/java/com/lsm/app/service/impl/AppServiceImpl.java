@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -48,6 +49,7 @@ public class AppServiceImpl implements IAppService {
         return appDao.getApp();
     }
 
+    @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
     @Override
     public Integer saveApp(AppDTO appDTO) {
         return baseClient.save(buildFull(appDTO));
