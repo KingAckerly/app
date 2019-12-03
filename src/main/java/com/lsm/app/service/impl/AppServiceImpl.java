@@ -55,7 +55,7 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public Integer removeApp(AppDTO appDTO) {
-        return baseClient.remove(buildFull(appDTO));
+        return null;
     }
 
     private AppEntity buildFull(AppDTO appDTO) {

@@ -74,19 +74,37 @@ public class BaseClientImpl<T> implements BaseClient<T> {
     }
 
     @Override
-    public Integer saveBatch() {
+    public String saveRetPK(T t) {
         return null;
     }
 
     @Override
-    public Integer remove(T t) {
-        Map<String, Object> params = buildParams(t);
-        logger.info("Function Remove.Params:" + params);
-        return baseDao.remove(params);
+    public Integer saveBatch(List<T> list) {
+        return null;
     }
 
     @Override
-    public Integer removeBatch(T t) {
+    public List<String> saveBatchRetPK(List<T> list) {
+        return null;
+    }
+
+    @Override
+    public Integer removeByPK(T t) {
+        return null;
+    }
+
+    @Override
+    public Integer removeBatchByPK(List<T> list) {
+        return null;
+    }
+
+    @Override
+    public Integer removeByCondition(T t, String condition) {
+        return null;
+    }
+
+    @Override
+    public Integer update(T t, String condition) {
         return null;
     }
 
@@ -96,12 +114,14 @@ public class BaseClientImpl<T> implements BaseClient<T> {
     }
 
     @Override
-    public Integer update(Object object) {
+    public Integer count(T t, String condition) {
         return null;
     }
 
     @Override
-    public HashMap query(Integer id, Class c) {
+    public HashMap list(T t, String condition) {
         return null;
     }
+
+
 }

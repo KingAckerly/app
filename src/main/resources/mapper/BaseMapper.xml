@@ -12,13 +12,4 @@
         </foreach>
         )
     </insert>
-    <delete id="remove" parameterType="java.util.HashMap">
-        DELETE FROM ${TABLE_NAME}
-        <if test="${item} != null">
-            where
-            <foreach collection="COLUMNS" item="item" index="index" separator=",">
-                ${item}
-            </foreach>
-        </if>
-    </delete>
 </mapper>
