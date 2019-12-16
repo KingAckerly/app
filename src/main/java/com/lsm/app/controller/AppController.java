@@ -74,10 +74,10 @@ public class AppController {
         return "SUCCESS";
     }
 
-    @RequestMapping(value = "/getApp", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/getApp", method = RequestMethod.GET)
     public Result getApp() {
         return ReturnResponse.success(appService.getApp());
-    }
+    }*/
 
     @RequestMapping(value = "/saveApp", method = RequestMethod.POST)
     public Result saveApp(@Validated(value = AppGroups.Insert.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
@@ -93,6 +93,14 @@ public class AppController {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
         return ReturnResponse.success(appService.removeApp(appDTO));
+    }
+
+    @RequestMapping(value = "/getApp", method = RequestMethod.POST)
+    public Result getApp(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.getApp(appDTO));
     }
 
 }

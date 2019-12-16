@@ -8,9 +8,11 @@ public interface IAppService {
 
     void testElegantShutdown();
 
-    AppEntity getApp();
+    //AppEntity getApp();
 
     Integer saveApp(AppDTO appDTO);
 
     Integer removeApp(AppDTO appDTO);
+
+    AppEntity getApp(AppDTO appDTO);
 }

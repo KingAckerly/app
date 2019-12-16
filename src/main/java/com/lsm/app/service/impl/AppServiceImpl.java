@@ -44,10 +44,10 @@ public class AppServiceImpl implements IAppService {
         }
     }
 
-    @Override
+    /*@Override
     public AppEntity getApp() {
         return appDao.getApp();
-    }
+    }*/
 
     @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
     @Override
@@ -57,6 +57,12 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public Integer removeApp(AppDTO appDTO) {
+        return null;
+    }
+
+    @Override
+    public AppEntity getApp(AppDTO appDTO) {
+        baseClient.get(null, null);
         return null;
     }
 
