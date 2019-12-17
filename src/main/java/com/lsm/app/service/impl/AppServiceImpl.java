@@ -68,8 +68,8 @@ public class AppServiceImpl implements IAppService {
         List<Where> wheres = new ArrayList<>();
         wheres.add(new Where("and", "app_name", "=", appDTO.getAppName()));
         wheres.add(new Where("and", "app_key", "=", appDTO.getAppKey()));
-        baseClient.get(new AppEntity(), wheres);
-        return null;
+        AppEntity appEntity = (AppEntity) baseClient.get(new AppEntity(), wheres);
+        return appEntity;
     }
 
     private AppEntity buildFull(AppDTO appDTO) {
