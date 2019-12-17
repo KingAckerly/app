@@ -5,6 +5,7 @@ import com.lsm.app.dto.AppDTO;
 import com.lsm.app.feign.UserServerFeign;
 import com.lsm.app.service.IAppService;
 import com.lsm.common.db.BaseClient;
+import com.lsm.common.db.Where;
 import com.lsm.common.entity.app.AppEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AppServiceImpl implements IAppService {
@@ -62,7 +65,10 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public AppEntity getApp(AppDTO appDTO) {
-        baseClient.get(null, null);
+        List<Where> wheres = new ArrayList<>();
+        wheres.add(new Where("and", "app_name", "=", appDTO.getAppName()));
+        wheres.add(new Where("and", "app_key", "=", appDTO.getAppKey()));
+        baseClient.get(new AppEntity(), wheres);
         return null;
     }
 
