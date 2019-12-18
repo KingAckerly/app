@@ -58,7 +58,9 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public Integer removeApp(AppDTO appDTO) {
-        return null;
+        Where where = new Where(AppEntity.class);
+        where.and("app_key", "=", appDTO.getAppKey());
+        return baseClient.remove(where);
     }
 
     @Override
