@@ -95,6 +95,14 @@ public class AppController {
         return ReturnResponse.success(appService.removeApp(appDTO));
     }
 
+    @RequestMapping(value = "/updateApp", method = RequestMethod.POST)
+    public Result updateApp(@Validated(value = AppGroups.Update.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.updateApp(appDTO));
+    }
+
     @RequestMapping(value = "/getApp", method = RequestMethod.POST)
     public Result getApp(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

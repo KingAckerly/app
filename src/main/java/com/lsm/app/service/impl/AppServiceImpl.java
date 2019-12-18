@@ -64,6 +64,13 @@ public class AppServiceImpl implements IAppService {
     }
 
     @Override
+    public Integer updateApp(AppDTO appDTO) {
+        Where where = new Where(AppEntity.class);
+        where.and("app_key", "=", appDTO.getAppKey());
+        return baseClient.update(buildFull(appDTO), where);
+    }
+
+    @Override
     public AppEntity getApp(AppDTO appDTO) {
         Where where = new Where(AppEntity.class);
         where.and("app_name", "=", appDTO.getAppName());
