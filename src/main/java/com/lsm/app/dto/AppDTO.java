@@ -14,6 +14,8 @@ public class AppDTO {
     private String appName;
     private String appInfo;
     private String appKey;
+    private Integer createrId;
+    private Integer updaterId;
 
     public Integer getId() {
         return id;
@@ -51,6 +53,24 @@ public class AppDTO {
         return this;
     }
 
+    public Integer getCreaterId() {
+        return createrId;
+    }
+
+    public AppDTO setCreaterId(Integer createrId) {
+        this.createrId = createrId;
+        return this;
+    }
+
+    public Integer getUpdaterId() {
+        return updaterId;
+    }
+
+    public AppDTO setUpdaterId(Integer updaterId) {
+        this.updaterId = updaterId;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "AppDTO{" +
@@ -58,6 +78,8 @@ public class AppDTO {
                 ", appName='" + appName + '\'' +
                 ", appInfo='" + appInfo + '\'' +
                 ", appKey='" + appKey + '\'' +
+                ", createrId=" + createrId +
+                ", updaterId=" + updaterId +
                 '}';
     }
 }

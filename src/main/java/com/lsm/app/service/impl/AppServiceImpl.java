@@ -79,7 +79,7 @@ public class AppServiceImpl implements IAppService {
     }
 
     private AppEntity buildFull(AppDTO appDTO) {
-        return new AppEntity().setId(appDTO.getId()).setAppName(appDTO.getAppName()).setAppInfo(appDTO.getAppInfo())
-                .setAppKey(appDTO.getAppKey());
+        return (AppEntity) new AppEntity().setAppName(appDTO.getAppName()).setAppInfo(appDTO.getAppInfo()).setAppKey(appDTO.getAppKey())
+                .setId(appDTO.getId()).setCreaterId(appDTO.getCreaterId()).setUpdaterId(appDTO.getUpdaterId());
     }
 }
