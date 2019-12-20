@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class AppServiceImpl implements IAppService {
@@ -72,10 +74,13 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public AppEntity getApp(AppDTO appDTO) {
+        String[] str = {"id", "app_name"};
+        List<String> selectColumns = Arrays.asList(str);
         Where where = new Where(AppEntity.class);
         where.and("app_name", "=", appDTO.getAppName());
         where.and("app_key", "=", appDTO.getAppKey());
-        return (AppEntity) baseClient.get(where);
+        return (AppEntity) baseClient.get(selectColumns, where);
+        //return (AppEntity) baseClient.get(where);
     }
 
     private AppEntity buildFull(AppDTO appDTO) {
