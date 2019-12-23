@@ -93,8 +93,7 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public List<AppEntity> listApp(AppDTO appDTO) {
-        String[] str = {"id", "app_name"};
-        List<String> selectColumns = Arrays.asList(str);
+        String[] selectColumns = {"id", "app_name"};
         Where where = new Where();
         //where.and("app_name", "=", appDTO.getAppName());
         where.and("app_name", ExpressionEnum.LIKE.getExp(), "%" + appDTO.getAppName() + "%");
@@ -102,7 +101,9 @@ public class AppServiceImpl implements IAppService {
         //where.and("app_info", ExpressionEnum.IS_NULL.getExp());
         where.and("app_info", ExpressionEnum.IS_NOT_NULL.getExp());
         //where.and("id", ExpressionEnum.NOT_BETWEEN.getExp(), "100", "200");
-        return (List<AppEntity>) baseClient.list(buildFull(appDTO), where, selectColumns);
+        String[] orderFields = {"id", "app_name"};
+        where.orderBy(Arrays.asList(orderFields), "DESC");
+        return (List<AppEntity>) baseClient.list(buildFull(appDTO), where, Arrays.asList(selectColumns));
     }
 
     private AppEntity buildFull(AppDTO appDTO) {
