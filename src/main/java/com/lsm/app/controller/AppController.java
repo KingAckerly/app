@@ -103,6 +103,14 @@ public class AppController {
         return ReturnResponse.success(appService.updateApp(appDTO));
     }
 
+    @RequestMapping(value = "/getAppCount", method = RequestMethod.POST)
+    public Result getAppCount(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.getAppCount(appDTO));
+    }
+
     @RequestMapping(value = "/getApp", method = RequestMethod.POST)
     public Result getApp(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -111,4 +119,11 @@ public class AppController {
         return ReturnResponse.success(appService.getApp(appDTO));
     }
 
+    @RequestMapping(value = "/listApp", method = RequestMethod.POST)
+    public Result listApp(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.listApp(appDTO));
+    }
 }

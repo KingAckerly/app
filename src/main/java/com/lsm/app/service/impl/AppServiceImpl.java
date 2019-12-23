@@ -73,6 +73,13 @@ public class AppServiceImpl implements IAppService {
     }
 
     @Override
+    public Integer getAppCount(AppDTO appDTO) {
+        Where where = new Where();
+        where.and("app_name", "=", appDTO.getAppName());
+        return baseClient.getCount(buildFull(appDTO), where, null);
+    }
+
+    @Override
     public AppEntity getApp(AppDTO appDTO) {
         String[] str = {"id", "app_name"};
         List<String> selectColumns = Arrays.asList(str);
@@ -81,6 +88,15 @@ public class AppServiceImpl implements IAppService {
         where.and("app_key", "=", appDTO.getAppKey());
         return (AppEntity) baseClient.get(buildFull(appDTO), where, selectColumns);
         //return (AppEntity) baseClient.get(buildFull(appDTO), where, null);
+    }
+
+    @Override
+    public List<AppEntity> listApp(AppDTO appDTO) {
+        String[] str = {"id", "app_name"};
+        List<String> selectColumns = Arrays.asList(str);
+        Where where = new Where();
+        where.and("app_name", "=", appDTO.getAppName());
+        return (List<AppEntity>) baseClient.list(buildFull(appDTO), where, selectColumns);
     }
 
     private AppEntity buildFull(AppDTO appDTO) {
