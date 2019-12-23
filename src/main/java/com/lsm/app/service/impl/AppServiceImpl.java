@@ -76,7 +76,7 @@ public class AppServiceImpl implements IAppService {
     public Integer getAppCount(AppDTO appDTO) {
         Where where = new Where();
         where.and("app_name", "=", appDTO.getAppName());
-        return baseClient.getCount(buildFull(appDTO), where, null);
+        return baseClient.getCount(buildFull(appDTO), where);
     }
 
     @Override
