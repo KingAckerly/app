@@ -60,14 +60,14 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public Integer removeApp(AppDTO appDTO) {
-        Where where = new Where(AppEntity.class);
+        Where where = new Where();
         where.and("app_key", "=", appDTO.getAppKey());
-        return baseClient.remove(where);
+        return baseClient.remove(buildFull(appDTO), where);
     }
 
     @Override
     public Integer updateApp(AppDTO appDTO) {
-        Where where = new Where(AppEntity.class);
+        Where where = new Where();
         where.and("app_key", "=", appDTO.getAppKey());
         return baseClient.update(buildFull(appDTO), where);
     }
@@ -76,11 +76,11 @@ public class AppServiceImpl implements IAppService {
     public AppEntity getApp(AppDTO appDTO) {
         String[] str = {"id", "app_name"};
         List<String> selectColumns = Arrays.asList(str);
-        Where where = new Where(AppEntity.class);
+        Where where = new Where();
         where.and("app_name", "=", appDTO.getAppName());
         where.and("app_key", "=", appDTO.getAppKey());
-        return (AppEntity) baseClient.get(selectColumns, where);
-        //return (AppEntity) baseClient.get(where);
+        return (AppEntity) baseClient.get(buildFull(appDTO), where, selectColumns);
+        //return (AppEntity) baseClient.get(buildFull(appDTO), where, null);
     }
 
     private AppEntity buildFull(AppDTO appDTO) {
