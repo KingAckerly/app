@@ -5,6 +5,7 @@ import com.lsm.app.dto.AppDTO;
 import com.lsm.app.feign.UserServerFeign;
 import com.lsm.app.service.IAppService;
 import com.lsm.common.db.BaseClient;
+import com.lsm.common.db.ExpressionEnum;
 import com.lsm.common.db.Where;
 import com.lsm.common.entity.app.AppEntity;
 import org.slf4j.Logger;
@@ -61,21 +62,21 @@ public class AppServiceImpl implements IAppService {
     @Override
     public Integer removeApp(AppDTO appDTO) {
         Where where = new Where();
-        where.and("app_key", "=", appDTO.getAppKey());
+        where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.remove(buildFull(appDTO), where);
     }
 
     @Override
     public Integer updateApp(AppDTO appDTO) {
         Where where = new Where();
-        where.and("app_key", "=", appDTO.getAppKey());
+        where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.update(buildFull(appDTO), where);
     }
 
     @Override
     public Integer getAppCount(AppDTO appDTO) {
         Where where = new Where();
-        where.and("app_name", "=", appDTO.getAppName());
+        where.and("app_name", ExpressionEnum.EQ.getExp(), appDTO.getAppName());
         return baseClient.getCount(buildFull(appDTO), where);
     }
 
@@ -84,8 +85,8 @@ public class AppServiceImpl implements IAppService {
         String[] str = {"id", "app_name"};
         List<String> selectColumns = Arrays.asList(str);
         Where where = new Where();
-        where.and("app_name", "=", appDTO.getAppName());
-        where.and("app_key", "=", appDTO.getAppKey());
+        where.and("app_name", ExpressionEnum.EQ.getExp(), appDTO.getAppName());
+        where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return (AppEntity) baseClient.get(buildFull(appDTO), where, selectColumns);
         //return (AppEntity) baseClient.get(buildFull(appDTO), where, null);
     }
@@ -95,7 +96,12 @@ public class AppServiceImpl implements IAppService {
         String[] str = {"id", "app_name"};
         List<String> selectColumns = Arrays.asList(str);
         Where where = new Where();
-        where.and("app_name", "=", appDTO.getAppName());
+        //where.and("app_name", "=", appDTO.getAppName());
+        where.and("app_name", ExpressionEnum.LIKE.getExp(), "%" + appDTO.getAppName() + "%");
+        where.and("id", ExpressionEnum.BETWEEN.getExp(), "1", "100");
+        //where.and("app_info", ExpressionEnum.IS_NULL.getExp());
+        where.and("app_info", ExpressionEnum.IS_NOT_NULL.getExp());
+        //where.and("id", ExpressionEnum.NOT_BETWEEN.getExp(), "100", "200");
         return (List<AppEntity>) baseClient.list(buildFull(appDTO), where, selectColumns);
     }
 
