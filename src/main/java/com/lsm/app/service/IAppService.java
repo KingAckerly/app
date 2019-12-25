@@ -12,17 +12,20 @@ public interface IAppService {
 
     //AppEntity getApp();
 
-    Integer saveApp(AppDTO appDTO);
+    //    Integer saveApp(AppDTO appDTO);
+//
+    Integer saveBatchApp(List<AppDTO> appDTOList, Integer userId);
 
-    Integer removeApp(AppDTO appDTO);
-
-    Integer deleteApp(AppDTO appDTO);
-
-    Integer updateApp(AppDTO appDTO);
-
-    Integer getAppCount(AppDTO appDTO);
-
-    AppEntity getApp(AppDTO appDTO);
-
-    List<AppEntity> listApp(AppDTO appDTO);
+    //    Integer removeApp(AppDTO appDTO);
+//
+//    Integer deleteApp(AppDTO appDTO);
+    Integer deleteBatchApp(List<Integer> ids);
+//
+//    Integer updateApp(AppDTO appDTO);
+//
+//    Integer getAppCount(AppDTO appDTO);
+//
+//    AppEntity getApp(AppDTO appDTO);
+//
+//    List<AppEntity> listApp(AppDTO appDTO);
 }

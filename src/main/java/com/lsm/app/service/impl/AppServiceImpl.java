@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,42 +55,56 @@ public class AppServiceImpl implements IAppService {
         return appDao.getApp();
     }*/
 
-    @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
+   /* @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
     @Override
     public Integer saveApp(AppDTO appDTO) {
         return baseClient.save(buildFull(appDTO));
         //return baseClient.save(new AppEntity());
-    }
+    }*/
 
     @Override
+    public Integer saveBatchApp(List<AppDTO> appDTOList, Integer userId) {
+        List<AppEntity> appEntityList = new ArrayList<>();
+        for (AppDTO appDTO : appDTOList) {
+            appEntityList.add(buildFull(appDTO));
+        }
+        return baseClient.saveBatch(appEntityList, userId);
+    }
+
+    /*@Override
     public Integer removeApp(AppDTO appDTO) {
         Where where = new Where();
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.remove(buildFull(appDTO), where);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Integer deleteApp(AppDTO appDTO) {
         Where where = new Where();
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.delete(buildFull(appDTO), where);
-    }
+    }*/
 
     @Override
+    public Integer deleteBatchApp(List<Integer> ids) {
+        return baseClient.deleteBatch(AppEntity.class, ids);
+    }
+
+    /*@Override
     public Integer updateApp(AppDTO appDTO) {
         Where where = new Where();
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.update(buildFull(appDTO), where);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Integer getAppCount(AppDTO appDTO) {
         Where where = new Where();
         where.and("app_name", ExpressionEnum.EQ.getExp(), appDTO.getAppName());
         return baseClient.getCount(buildFull(appDTO), where);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public AppEntity getApp(AppDTO appDTO) {
         String[] selectColumns = {"id", "app_name"};
         Where where = new Where();
@@ -97,9 +112,9 @@ public class AppServiceImpl implements IAppService {
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return (AppEntity) baseClient.get(buildFull(appDTO), where, Arrays.asList(selectColumns));
         //return (AppEntity) baseClient.get(buildFull(appDTO), where, null);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<AppEntity> listApp(AppDTO appDTO) {
         String[] selectColumns = {"id", "app_name"};
         String[] orderFields = {"id"};
@@ -108,7 +123,7 @@ public class AppServiceImpl implements IAppService {
         where.and("id", ExpressionEnum.BETWEEN.getExp(), "1", "100");
         where.and("app_info", ExpressionEnum.IS_NOT_NULL.getExp());
         return (List<AppEntity>) baseClient.list(buildFull(appDTO), where, Arrays.asList(selectColumns));
-    }
+    }*/
 
     private AppEntity buildFull(AppDTO appDTO) {
         return (AppEntity) new AppEntity().setAppName(appDTO.getAppName()).setAppInfo(appDTO.getAppInfo()).setAppKey(appDTO.getAppKey())
