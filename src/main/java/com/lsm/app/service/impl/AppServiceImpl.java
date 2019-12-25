@@ -58,6 +58,7 @@ public class AppServiceImpl implements IAppService {
     @Override
     public Integer saveApp(AppDTO appDTO) {
         return baseClient.save(buildFull(appDTO));
+        //return baseClient.save(new AppEntity());
     }
 
     @Override
@@ -65,6 +66,13 @@ public class AppServiceImpl implements IAppService {
         Where where = new Where();
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.remove(buildFull(appDTO), where);
+    }
+
+    @Override
+    public Integer deleteApp(AppDTO appDTO) {
+        Where where = new Where();
+        where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
+        return baseClient.delete(buildFull(appDTO), where);
     }
 
     @Override

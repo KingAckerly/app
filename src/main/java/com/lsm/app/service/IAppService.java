@@ -16,6 +16,8 @@ public interface IAppService {
 
     Integer removeApp(AppDTO appDTO);
 
+    Integer deleteApp(AppDTO appDTO);
+
     Integer updateApp(AppDTO appDTO);
 
     Integer getAppCount(AppDTO appDTO);
