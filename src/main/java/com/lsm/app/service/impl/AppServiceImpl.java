@@ -6,6 +6,7 @@ import com.lsm.app.feign.UserServerFeign;
 import com.lsm.app.service.IAppService;
 import com.lsm.common.db.BaseClient;
 import com.lsm.common.db.ExpressionEnum;
+import com.lsm.common.db.OrderByEnum;
 import com.lsm.common.db.Where;
 import com.lsm.common.entity.app.AppEntity;
 import org.slf4j.Logger;
@@ -82,27 +83,22 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public AppEntity getApp(AppDTO appDTO) {
-        String[] str = {"id", "app_name"};
-        List<String> selectColumns = Arrays.asList(str);
+        String[] selectColumns = {"id", "app_name"};
         Where where = new Where();
         where.and("app_name", ExpressionEnum.EQ.getExp(), appDTO.getAppName());
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
-        return (AppEntity) baseClient.get(buildFull(appDTO), where, selectColumns);
+        return (AppEntity) baseClient.get(buildFull(appDTO), where, Arrays.asList(selectColumns));
         //return (AppEntity) baseClient.get(buildFull(appDTO), where, null);
     }
 
     @Override
     public List<AppEntity> listApp(AppDTO appDTO) {
         String[] selectColumns = {"id", "app_name"};
-        Where where = new Where();
-        //where.and("app_name", "=", appDTO.getAppName());
+        String[] orderFields = {"id"};
+        Where where = new Where(Arrays.asList(orderFields), OrderByEnum.DESC.getType());
         where.and("app_name", ExpressionEnum.LIKE.getExp(), "%" + appDTO.getAppName() + "%");
         where.and("id", ExpressionEnum.BETWEEN.getExp(), "1", "100");
-        //where.and("app_info", ExpressionEnum.IS_NULL.getExp());
         where.and("app_info", ExpressionEnum.IS_NOT_NULL.getExp());
-        //where.and("id", ExpressionEnum.NOT_BETWEEN.getExp(), "100", "200");
-        String[] orderFields = {"id", "app_name"};
-        where.orderBy(Arrays.asList(orderFields), "DESC");
         return (List<AppEntity>) baseClient.list(buildFull(appDTO), where, Arrays.asList(selectColumns));
     }
 
