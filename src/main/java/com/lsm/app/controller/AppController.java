@@ -95,24 +95,38 @@ public class AppController {
         return ReturnResponse.success(appService.saveBatchApp(appDTOList, userId));
     }
 
-    /*@RequestMapping(value = "/removeApp", method = RequestMethod.POST)
-    public Result removeApp(@Validated(value = AppGroups.Delete.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+    @RequestMapping(value = "/removeApp", method = RequestMethod.POST)
+    public Result removeApp(@Validated(value = AppGroups.Delete.class) @RequestBody AppDTO appDTO, BindingResult bindingResult, @RequestHeader(value = "userId") Integer userId) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
-        return ReturnResponse.success(appService.removeApp(appDTO));
-    }*/
+        if (null == userId) {
+            return ReturnResponse.failParame("userId IS NULL.");
+        }
+        return ReturnResponse.success(appService.removeApp(appDTO, userId));
+    }
 
-    /*@RequestMapping(value = "/deleteApp", method = RequestMethod.POST)
+    @RequestMapping(value = "/removeBatchApp", method = RequestMethod.POST)
+    public Result removeBatchApp(@RequestBody List<Integer> ids, @RequestHeader(value = "userId") Integer userId) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return ReturnResponse.failParame("ids IS NULL OR IS EMPTY.");
+        }
+        if (null == userId) {
+            return ReturnResponse.failParame("userId IS NULL.");
+        }
+        return ReturnResponse.success(appService.removeBatchApp(ids, userId));
+    }
+
+    @RequestMapping(value = "/deleteApp", method = RequestMethod.POST)
     public Result deleteApp(@Validated(value = AppGroups.Delete.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
         return ReturnResponse.success(appService.deleteApp(appDTO));
-    }*/
+    }
 
     @RequestMapping(value = "/deleteBatchApp", method = RequestMethod.POST)
-    public Result deleteApp(@RequestBody List<Integer> ids) {
+    public Result deleteBatchApp(@RequestBody List<Integer> ids) {
         if (CollectionUtils.isEmpty(ids)) {
             return ReturnResponse.failParame("ids IS NULL OR IS EMPTY.");
         }
@@ -126,6 +140,14 @@ public class AppController {
         }
         return ReturnResponse.success(appService.updateApp(appDTO));
     }*/
+
+    @RequestMapping(value = "/updateBatchApp", method = RequestMethod.POST)
+    public Result updateBatchApp(@Validated(value = AppGroups.Update.class) @RequestBody List<AppDTO> appDTOList, BindingResult bindingResult, @RequestHeader(value = "userId") Integer userId) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.updateBatchApp(appDTOList, userId));
+    }
 
     /*@RequestMapping(value = "/getAppCount", method = RequestMethod.POST)
     public Result getAppCount(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {

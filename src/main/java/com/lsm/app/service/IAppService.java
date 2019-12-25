@@ -16,12 +16,17 @@ public interface IAppService {
 //
     Integer saveBatchApp(List<AppDTO> appDTOList, Integer userId);
 
-    //    Integer removeApp(AppDTO appDTO);
-//
-//    Integer deleteApp(AppDTO appDTO);
+    Integer removeApp(AppDTO appDTO, Integer userId);
+
+    Integer removeBatchApp(List<Integer> ids, Integer userId);
+
+    Integer deleteApp(AppDTO appDTO);
+
     Integer deleteBatchApp(List<Integer> ids);
-//
+
+    //
 //    Integer updateApp(AppDTO appDTO);
+    Integer updateBatchApp(List<AppDTO> appDTOList, Integer userId);
 //
 //    Integer getAppCount(AppDTO appDTO);
 //

@@ -71,19 +71,25 @@ public class AppServiceImpl implements IAppService {
         return baseClient.saveBatch(appEntityList, userId);
     }
 
-    /*@Override
-    public Integer removeApp(AppDTO appDTO) {
-        Where where = new Where();
-        where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
-        return baseClient.remove(buildFull(appDTO), where);
-    }*/
+    @Override
+    public Integer removeApp(AppDTO appDTO, Integer userId) {
+        //Where where = new Where();
+        //where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
+        //return baseClient.remove(buildFull(appDTO), where, userId);
+        return baseClient.remove(buildFull(appDTO), null, userId);
+    }
 
-    /*@Override
+    @Override
+    public Integer removeBatchApp(List<Integer> ids, Integer userId) {
+        return baseClient.removeBatch(AppEntity.class, ids, userId);
+    }
+
+    @Override
     public Integer deleteApp(AppDTO appDTO) {
         Where where = new Where();
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.delete(buildFull(appDTO), where);
-    }*/
+    }
 
     @Override
     public Integer deleteBatchApp(List<Integer> ids) {
@@ -96,6 +102,15 @@ public class AppServiceImpl implements IAppService {
         where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
         return baseClient.update(buildFull(appDTO), where);
     }*/
+
+    @Override
+    public Integer updateBatchApp(List<AppDTO> appDTOList, Integer userId) {
+        List<AppEntity> appEntityList = new ArrayList<>();
+        for (AppDTO appDTO : appDTOList) {
+            appEntityList.add(buildFull(appDTO));
+        }
+        return baseClient.updateBatch(appEntityList, userId, null);
+    }
 
     /*@Override
     public Integer getAppCount(AppDTO appDTO) {
