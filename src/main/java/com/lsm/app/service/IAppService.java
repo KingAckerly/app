@@ -1,5 +1,6 @@
 package com.lsm.app.service;
 
+import com.github.pagehelper.PageInfo;
 import com.lsm.app.dto.AppDTO;
 import com.lsm.entity.entity.app.AppEntity;
 
@@ -29,4 +30,6 @@ public interface IAppService {
     AppEntity getApp(AppDTO appDTO);
 
     List<AppEntity> listApp(AppDTO appDTO);
+
+    PageInfo listPageApp(AppDTO appDTO);
 }

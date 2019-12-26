@@ -162,4 +162,12 @@ public class AppController {
         }
         return ReturnResponse.success(appService.listApp(appDTO));
     }
+
+    @RequestMapping(value = "/listPageApp", method = RequestMethod.POST)
+    public Result listPageApp(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ReturnResponse.success(appService.listPageApp(appDTO));
+    }
 }

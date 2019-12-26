@@ -1,5 +1,6 @@
 package com.lsm.app.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.lsm.app.dao.IAppDao;
 import com.lsm.app.dto.AppDTO;
 import com.lsm.app.feign.UserServerFeign;
@@ -128,6 +129,15 @@ public class AppServiceImpl implements IAppService {
         where.and("id", ExpressionEnum.BETWEEN.getExp(), "1", "100");
         where.and("app_info", ExpressionEnum.IS_NOT_NULL.getExp());
         return (List<AppEntity>) baseClient.list(buildFull(appDTO), where, Arrays.asList(selectColumns));
+    }
+
+    @Override
+    public PageInfo listPageApp(AppDTO appDTO) {
+        String[] selectColumns = {"id", "app_name"};
+        String[] orderFields = {"id"};
+        Where where = new Where(Arrays.asList(orderFields), OrderByEnum.DESC.getType());
+        where.and("app_name", ExpressionEnum.LIKE.getExp(), "%" + appDTO.getAppName() + "%");
+        return baseClient.listPage(buildFull(appDTO), where, Arrays.asList(selectColumns), appDTO.getPageNum(), appDTO.getPageSize());
     }
 
     private AppEntity buildFull(AppDTO appDTO) {

@@ -16,6 +16,8 @@ public class AppDTO {
     private String appKey;
     private Integer createrId;
     private Integer updaterId;
+    private Integer pageNum;
+    private Integer pageSize;
 
     public Integer getId() {
         return id;
@@ -71,6 +73,24 @@ public class AppDTO {
         return this;
     }
 
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public AppDTO setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+        return this;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public AppDTO setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "AppDTO{" +
@@ -80,6 +100,8 @@ public class AppDTO {
                 ", appKey='" + appKey + '\'' +
                 ", createrId=" + createrId +
                 ", updaterId=" + updaterId +
+                ", pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
                 '}';
     }
 }
