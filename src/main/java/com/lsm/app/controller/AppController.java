@@ -74,19 +74,6 @@ public class AppController {
         return "SUCCESS";
     }
 
-    /*@RequestMapping(value = "/getApp", method = RequestMethod.GET)
-    public Result getApp() {
-        return ReturnResponse.success(appService.getApp());
-    }*/
-
-    /*@RequestMapping(value = "/saveApp", method = RequestMethod.POST)
-    public Result saveApp(@Validated(value = AppGroups.Insert.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
-        }
-        return ReturnResponse.success(appService.saveApp(appDTO));
-    }*/
-
     @RequestMapping(value = "/saveBatchApp", method = RequestMethod.POST)
     public Result saveBatchApp(@Validated(value = AppGroups.Insert.class) @RequestBody List<AppDTO> appDTOList, BindingResult bindingResult, @RequestHeader(value = "userId") Integer userId) {
         if (bindingResult.hasErrors()) {
@@ -133,13 +120,16 @@ public class AppController {
         return ReturnResponse.success(appService.deleteBatchApp(ids));
     }
 
-    /*@RequestMapping(value = "/updateApp", method = RequestMethod.POST)
-    public Result updateApp(@Validated(value = AppGroups.Update.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
+    @RequestMapping(value = "/updateApp", method = RequestMethod.POST)
+    public Result updateApp(@Validated(value = AppGroups.Update.class) @RequestBody AppDTO appDTO, BindingResult bindingResult, @RequestHeader(value = "userId") Integer userId) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
-        return ReturnResponse.success(appService.updateApp(appDTO));
-    }*/
+        if (null == userId) {
+            return ReturnResponse.failParame("userId IS NULL.");
+        }
+        return ReturnResponse.success(appService.updateApp(appDTO, userId));
+    }
 
     @RequestMapping(value = "/updateBatchApp", method = RequestMethod.POST)
     public Result updateBatchApp(@Validated(value = AppGroups.Update.class) @RequestBody List<AppDTO> appDTOList, BindingResult bindingResult, @RequestHeader(value = "userId") Integer userId) {
@@ -149,27 +139,27 @@ public class AppController {
         return ReturnResponse.success(appService.updateBatchApp(appDTOList, userId));
     }
 
-    /*@RequestMapping(value = "/getAppCount", method = RequestMethod.POST)
+    @RequestMapping(value = "/getAppCount", method = RequestMethod.POST)
     public Result getAppCount(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
         return ReturnResponse.success(appService.getAppCount(appDTO));
-    }*/
+    }
 
-    /*@RequestMapping(value = "/getApp", method = RequestMethod.POST)
+    @RequestMapping(value = "/getApp", method = RequestMethod.POST)
     public Result getApp(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
         return ReturnResponse.success(appService.getApp(appDTO));
-    }*/
+    }
 
-    /*@RequestMapping(value = "/listApp", method = RequestMethod.POST)
+    @RequestMapping(value = "/listApp", method = RequestMethod.POST)
     public Result listApp(@Validated(value = AppGroups.Select.class) @RequestBody AppDTO appDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
         return ReturnResponse.success(appService.listApp(appDTO));
-    }*/
+    }
 }

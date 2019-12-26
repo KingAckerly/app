@@ -10,10 +10,6 @@ public interface IAppService {
 
     void testElegantShutdown();
 
-    //AppEntity getApp();
-
-    //    Integer saveApp(AppDTO appDTO);
-//
     Integer saveBatchApp(List<AppDTO> appDTOList, Integer userId);
 
     Integer removeApp(AppDTO appDTO, Integer userId);
@@ -24,13 +20,13 @@ public interface IAppService {
 
     Integer deleteBatchApp(List<Integer> ids);
 
-    //
-//    Integer updateApp(AppDTO appDTO);
+    Integer updateApp(AppDTO appDTO, Integer userId);
+
     Integer updateBatchApp(List<AppDTO> appDTOList, Integer userId);
-//
-//    Integer getAppCount(AppDTO appDTO);
-//
-//    AppEntity getApp(AppDTO appDTO);
-//
-//    List<AppEntity> listApp(AppDTO appDTO);
+
+    Integer getAppCount(AppDTO appDTO);
+
+    AppEntity getApp(AppDTO appDTO);
+
+    List<AppEntity> listApp(AppDTO appDTO);
 }
