@@ -88,9 +88,9 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public Integer updateApp(AppDTO appDTO, Integer userId) {
-        Where where = new Where();
-        where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
-        return baseClient.update(buildFull(appDTO), where, userId);
+        //Where where = new Where();
+        //where.and("app_key", ExpressionEnum.EQ.getExp(), appDTO.getAppKey());
+        return baseClient.update(buildFull(appDTO), null, userId);
     }
 
     @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
@@ -133,11 +133,11 @@ public class AppServiceImpl implements IAppService {
 
     @Override
     public PageInfo listPageApp(AppDTO appDTO) {
-        String[] selectColumns = {"id", "app_name"};
+        //String[] selectColumns = {"id", "app_name"};
         String[] orderFields = {"id"};
         Where where = new Where(Arrays.asList(orderFields), OrderByEnum.DESC.getType());
         where.and("app_name", ExpressionEnum.LIKE.getExp(), "%" + appDTO.getAppName() + "%");
-        return baseClient.listPage(buildFull(appDTO), where, Arrays.asList(selectColumns), appDTO.getPageNum(), appDTO.getPageSize());
+        return baseClient.listPage(buildFull(appDTO), where, null, appDTO.getPageNum(), appDTO.getPageSize());
     }
 
     private AppEntity buildFull(AppDTO appDTO) {
