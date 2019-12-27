@@ -9,7 +9,7 @@ import com.lsm.common.db.BaseClient;
 import com.lsm.common.db.ExpressionEnum;
 import com.lsm.common.db.OrderByEnum;
 import com.lsm.common.db.Where;
-import com.lsm.entity.entity.app.AppEntity;
+import com.lsm.entity.app.AppEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

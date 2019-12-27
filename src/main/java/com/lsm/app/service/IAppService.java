@@ -2,7 +2,7 @@ package com.lsm.app.service;
 
 import com.github.pagehelper.PageInfo;
 import com.lsm.app.dto.AppDTO;
-import com.lsm.entity.entity.app.AppEntity;
+import com.lsm.entity.app.AppEntity;
 
 import java.util.List;
 
