@@ -77,7 +77,8 @@ public class AppController {
     }
 
     @RequestMapping(value = "/saveBatchApp", method = RequestMethod.POST)
-    @WebLog(description = "批量新增,入参[{{appDTOList}}]", level = 1, type = LogTypeEnum.INSERT)
+    //@WebLog(description = "批量新增,入参[{{appDTOList}}]", level = 1, type = LogTypeEnum.INSERT)
+    @WebLog(description = "批量新增", level = 1, type = LogTypeEnum.INSERT)
     public Result saveBatchApp(@Validated(value = AppGroups.Insert.class) @RequestBody List<AppDTO> appDTOList, BindingResult bindingResult, @RequestHeader(value = "userId") Integer userId) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
