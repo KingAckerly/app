@@ -5,8 +5,10 @@ import com.lsm.app.dto.AppDTO;
 import com.lsm.app.dto.groups.AppGroups;
 import com.lsm.app.service.IAppService;
 import com.lsm.common.annotation.CustomAnnotation;
+import com.lsm.common.annotation.WebLog;
 import com.lsm.common.base.Result;
 import com.lsm.common.base.ReturnResponse;
+import com.lsm.common.enums.LogTypeEnum;
 import com.lsm.entity.app.AppEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -75,6 +77,7 @@ public class AppController {
     }
 
     @RequestMapping(value = "/saveBatchApp", method = RequestMethod.POST)
+    @WebLog(description = "批量新增,入参[{{appDTOList}}]", level = 1, type = LogTypeEnum.INSERT)
     public Result saveBatchApp(@Validated(value = AppGroups.Insert.class) @RequestBody List<AppDTO> appDTOList, BindingResult bindingResult, @RequestHeader(value = "userId") Integer userId) {
         if (bindingResult.hasErrors()) {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
