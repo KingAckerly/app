@@ -63,10 +63,10 @@
             <artifactId>Memcached-Java-Client</artifactId>
             <version>3.0.2</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
