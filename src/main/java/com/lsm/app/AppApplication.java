@@ -1,5 +1,6 @@
 package com.lsm.app;
 
+//import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 //如果手动配置@ComponentScan，则在@SpringBootApplication下的@ComponentScan失效
 @ComponentScan({"com.lsm.app", "com.lsm.common"})
 @MapperScan({"com.lsm.app.dao", "com.lsm.common.dao"})
+//@EnableApolloConfig
 public class AppApplication {
 
     public static void main(String[] args) {
