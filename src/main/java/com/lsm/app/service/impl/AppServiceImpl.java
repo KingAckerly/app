@@ -55,9 +55,10 @@ public class AppServiceImpl implements IAppService {
     @Override
     public Integer saveBatchApp(List<AppDTO> appDTOList, Integer userId) {
         List<AppEntity> appEntityList = new ArrayList<>();
-        for (AppDTO appDTO : appDTOList) {
-            appEntityList.add(buildFull(appDTO));
-        }
+        appDTOList.forEach(appDTO -> appEntityList.add(buildFull(appDTO)));
+//        for (AppDTO appDTO : appDTOList) {
+//            appEntityList.add(buildFull(appDTO));
+//        }
         return baseClient.saveBatch(appEntityList, userId);
     }
 
@@ -97,9 +98,10 @@ public class AppServiceImpl implements IAppService {
     @Override
     public Integer updateBatchApp(List<AppDTO> appDTOList, Integer userId) {
         List<AppEntity> appEntityList = new ArrayList<>();
-        for (AppDTO appDTO : appDTOList) {
-            appEntityList.add(buildFull(appDTO));
-        }
+        appDTOList.forEach(appDTO -> appEntityList.add(buildFull(appDTO)));
+//        for (AppDTO appDTO : appDTOList) {
+//            appEntityList.add(buildFull(appDTO));
+//        }
         return baseClient.updateBatch(appEntityList, userId, null);
     }
 
