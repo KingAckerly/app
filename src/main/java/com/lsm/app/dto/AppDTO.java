@@ -6,6 +6,9 @@ import com.lsm.app.dto.groups.AppGroups;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @Valid可以用在嵌套对象上,配合校验
+ */
 public class AppDTO {
 
     //@NotNull(message = "APPID不能为空", groups = {AppGroups.Insert.class})
