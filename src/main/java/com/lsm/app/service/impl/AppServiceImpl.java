@@ -9,6 +9,7 @@ import com.lsm.common.db.BaseClient;
 import com.lsm.common.db.ExpressionEnum;
 import com.lsm.common.db.OrderByEnum;
 import com.lsm.common.db.Where;
+import com.lsm.common.exception.ServiceException;
 import com.lsm.entity.app.AppEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,6 +141,14 @@ public class AppServiceImpl implements IAppService {
         Where where = new Where(Arrays.asList(orderFields), OrderByEnum.DESC.getType());
         where.and("app_name", ExpressionEnum.LIKE.getExp(), "%" + appDTO.getAppName() + "%");
         return baseClient.listPage(buildFull(appDTO), where, null, appDTO.getPageNum(), appDTO.getPageSize());
+    }
+
+    @Override
+    public void testException() {
+        //测试系统异常
+        //int i = 1 / 0;
+        //测试自定义业务异常
+        throw new ServiceException("0001", "自定义业务异常");
     }
 
     private AppEntity buildFull(AppDTO appDTO) {

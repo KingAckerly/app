@@ -32,4 +32,6 @@ public interface IAppService {
     List<AppEntity> listApp(AppDTO appDTO);
 
     PageInfo listPageApp(AppDTO appDTO);
+
+    void testException();
 }

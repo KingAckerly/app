@@ -64,7 +64,6 @@ public class AppController {
         return ReturnResponse.success("新增APP成功");
     }
 
-
     /**
      * 测试优雅停机
      *
@@ -172,5 +171,16 @@ public class AppController {
             return ReturnResponse.failParame(bindingResult.getFieldError().getDefaultMessage());
         }
         return ReturnResponse.success(appService.listPageApp(appDTO));
+    }
+
+    /**
+     * 测试全局异常和自定义业务异常
+     *
+     * @return
+     */
+    @RequestMapping(value = "/testException", method = RequestMethod.GET)
+    public Result testException() {
+        appService.testException();
+        return ReturnResponse.success("testException");
     }
 }
