@@ -8,12 +8,13 @@ public class TestAsync {
         String url = "http://localhost:8763/app/async";
 
         //同步调用
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(url, String.class);
-        System.out.println(result);
+        //RestTemplate restTemplate = new RestTemplate();
+        //String result = restTemplate.getForObject(url, String.class);
+        //System.out.println("成功");
 
         //异步调用
-        //AsyncRestTemplate asyncRestTemplate=new AsyncRestTemplate();
-        //asyncRestTemplate.getForEntity(url,String.class);
+        AsyncRestTemplate asyncRestTemplate = new AsyncRestTemplate();
+        asyncRestTemplate.getForEntity(url, Object.class);
+        System.out.println("成功");
     }
 }
