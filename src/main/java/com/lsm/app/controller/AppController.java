@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/app")
@@ -25,10 +26,12 @@ public class AppController {
     @Autowired
     IAppService appService;
 
-    @RequestMapping(value = "/async", method = RequestMethod.GET)
-    public String async() {
+    @RequestMapping(value = "/async", method = RequestMethod.POST)
+    public String async(@RequestBody Map<String, Object> map) {
         try {
             System.out.println("async!");
+            System.out.println("name:" + map.get("name"));
+            System.out.println("age:" + map.get("age"));
             Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
