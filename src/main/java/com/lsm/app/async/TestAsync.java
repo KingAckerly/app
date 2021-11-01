@@ -10,15 +10,14 @@ import java.util.Map;
 
 public class TestAsync {
     public static void main(String[] args) {
+        AsyncRestTemplate asyncRestTemplate = new AsyncRestTemplate();
         String url = "http://localhost:8763/app/async";
-        //异步调用
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put("name", "zhangsan");
         requestMap.put("age", 30);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-        HttpEntity<Map<String, Object>> httpEntity = new HttpEntity<>(requestMap, headers);
-        AsyncRestTemplate asyncRestTemplate = new AsyncRestTemplate();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<Map<String, Object>> httpEntity = new HttpEntity<>(requestMap, httpHeaders);
         asyncRestTemplate.postForEntity(url, httpEntity, Object.class);
         System.out.println("成功");
     }
