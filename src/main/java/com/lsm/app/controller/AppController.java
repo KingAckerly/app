@@ -25,6 +25,17 @@ public class AppController {
     @Autowired
     IAppService appService;
 
+    @RequestMapping(value = "/async", method = RequestMethod.GET)
+    public String async() {
+        try {
+            System.out.println("async!");
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "async";
+    }
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return appService.test();
