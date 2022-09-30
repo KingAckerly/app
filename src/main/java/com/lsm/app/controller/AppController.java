@@ -2,6 +2,7 @@ package com.lsm.app.controller;
 
 
 import com.lsm.app.dto.AppDTO;
+import com.lsm.app.dto.IotStatusRequest;
 import com.lsm.app.dto.groups.AppGroups;
 import com.lsm.app.service.IAppService;
 import com.lsm.common.annotation.CustomAnnotation;
@@ -11,11 +12,17 @@ import com.lsm.common.base.ReturnResponse;
 import com.lsm.common.enums.LogTypeEnum;
 import com.lsm.entity.app.AppEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +32,25 @@ public class AppController {
 
     @Autowired
     IAppService appService;
+
+    @Resource
+    RestTemplate restTemplate;
+
+    @RequestMapping(value = "/restTemplateTest", method = RequestMethod.GET)
+    public String restTemplateTest() {
+        String url = "http://iot-uat-k8s.mindray.com/proxy/open-rds/api/reagentvector/alarm/handle";
+        IotStatusRequest iotStatusRequest = new IotStatusRequest();
+        iotStatusRequest.setAlertid("823fc3e5-1e72-4c5b-9f3f-4de7cfd4460a");
+        iotStatusRequest.setReason("未知原因");
+        iotStatusRequest.setStatecode("1");
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+        headers.setContentType(type);
+        HttpEntity<IotStatusRequest> entity = new HttpEntity<>(iotStatusRequest, headers);
+        Object o = restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
+        System.out.println(o);
+        return null;
+    }
 
     @RequestMapping(value = "/async", method = RequestMethod.POST)
     public String async(@RequestBody Map<String, Object> map) {
