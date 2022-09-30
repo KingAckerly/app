@@ -2,7 +2,7 @@ package com.lsm.app.controller;
 
 
 import com.lsm.app.dto.AppDTO;
-import com.lsm.app.dto.IotStatusRequest;
+import com.lsm.app.dto.RestTemplateRequest;
 import com.lsm.app.dto.groups.AppGroups;
 import com.lsm.app.service.IAppService;
 import com.lsm.common.annotation.CustomAnnotation;
@@ -38,15 +38,13 @@ public class AppController {
 
     @RequestMapping(value = "/restTemplateTest", method = RequestMethod.GET)
     public String restTemplateTest() {
-        String url = "http://iot-uat-k8s.mindray.com/proxy/open-rds/api/reagentvector/alarm/handle";
-        IotStatusRequest iotStatusRequest = new IotStatusRequest();
-        iotStatusRequest.setAlertid("823fc3e5-1e72-4c5b-9f3f-4de7cfd4460a");
-        iotStatusRequest.setReason("未知原因");
-        iotStatusRequest.setStatecode("1");
+        String url = "http://xxxxxx";
+        RestTemplateRequest restTemplateRequest = new RestTemplateRequest();
+        restTemplateRequest.setStr("str");
         HttpHeaders headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
         headers.setContentType(type);
-        HttpEntity<IotStatusRequest> entity = new HttpEntity<>(iotStatusRequest, headers);
+        HttpEntity<RestTemplateRequest> entity = new HttpEntity<>(restTemplateRequest, headers);
         Object o = restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
         System.out.println(o);
         return null;
