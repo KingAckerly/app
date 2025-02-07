@@ -19,6 +19,7 @@ public class ApolloController {
     @GetMapping("/test")
     public String test() {
         //第一个参数是配置文件的属性值
+
         return config.getProperty("server.port", "");
     }
 
